@@ -1,0 +1,8 @@
+/* This file is for your main application css. */
+
+btn-group-xl>.btn, .btn-xl {
+    padding: .10rem 2rem;
+    font-size: 2.5rem;
+    line-height: 3;
+    border-radius: .6rem;
+}

@@ -1,0 +1,10 @@
+<h1>Who starts?</h1>
+
+<div class="row">
+  <div class="col-sm">
+    <a class="btn btn-danger btn-block btn-xl" href="/">Player 2</a>
+  </div>
+  <div class="col-sm">
+    <a class="btn btn-primary btn-block btn-xl" href="/">Player 1</a>
+  </div>
+</div>
