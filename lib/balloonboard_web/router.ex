@@ -16,8 +16,7 @@ defmodule BalloonboardWeb.Router do
   scope "/api", BalloonboardWeb do
     pipe_through :api
 
-    resources "/sessions", Api.SessionController, only: [:create] do
-      # resources "/rounds", Api.RoundController, only: []
+    resources "/sessions", Api.SessionController, only: [] do
       post "/rounds/start", Api.RoundController, :start
       post "/rounds/stop", Api.RoundController, :stop
     end
@@ -27,7 +26,7 @@ defmodule BalloonboardWeb.Router do
     pipe_through :browser
 
     get "/", PageController, :index
-    get "/sessions/new", SessionController, :new
+    resources "/sessions", SessionController, only: [:new, :create, :show]
   end
 
   # Other scopes may use custom stacks.

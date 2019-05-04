@@ -11,10 +11,12 @@ defmodule BalloonboardWeb.Api.RoundView do
 
   defp render_round(round) do
     %{
-      id: round.id,
-      started_at: round.started_at,
-      stopped_at: round.stopped_at,
-      player: round.player
+      round: %{
+        id: round.id,
+        started_at: round.started_at,
+        stopped_at: round.stopped_at,
+        player: round.player
+      }
     }
   end
 end

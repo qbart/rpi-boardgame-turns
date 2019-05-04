@@ -2,8 +2,17 @@ defmodule BalloonboardWeb.Api.SessionController do
   use BalloonboardWeb, :controller
   alias Balloonboard.Repo
 
-  def create(conn, _params) do
+  def create(conn, %{"player" => player} = _params) do
     {:ok, session} = Repo.insert(%Session{uid: Ecto.UUID.generate()})
-    render conn, "create.json", session: session
+
+    {:ok, round} =
+      Repo.insert(%Round{
+        session_id: session.id,
+        player: String.to_integer(player),
+        started_at: TimeUtils.now(),
+        stopped_at: nil
+      })
+
+    render(conn, "create.json", session: session, round: round)
   end
 end
