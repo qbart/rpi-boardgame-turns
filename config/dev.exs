@@ -19,6 +19,9 @@ config :balloonboard, BalloonboardWeb.Endpoint,
       "--watch-stdin",
       cd: Path.expand("../assets", __DIR__)
     ]
+  ],
+  live_view: [
+    signing_salt: "E5beh4j5uaLtWHrLdhaFMgMXz7kK5mkTbh5tBsZbsKHbpB4reGfWLajnVkyuTfUO"
   ]
 
 # ## SSL Support

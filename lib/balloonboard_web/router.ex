@@ -5,6 +5,7 @@ defmodule BalloonboardWeb.Router do
     plug :accepts, ["html"]
     plug :fetch_session
     plug :fetch_flash
+    plug Phoenix.LiveView.Flash
     plug :protect_from_forgery
     plug :put_secure_browser_headers
   end
@@ -18,7 +19,6 @@ defmodule BalloonboardWeb.Router do
 
     resources "/sessions", Api.SessionController, only: [] do
       post "/rounds/start", Api.RoundController, :start
-      post "/rounds/stop", Api.RoundController, :stop
     end
   end
 
@@ -26,11 +26,8 @@ defmodule BalloonboardWeb.Router do
     pipe_through :browser
 
     get "/", PageController, :index
-    resources "/sessions", SessionController, only: [:new, :create, :show]
+    resources "/sessions", SessionController, only: [:new, :create, :show] do
+      post "/stop", SessionController, :stop, as: :stop
+    end
   end
-
-  # Other scopes may use custom stacks.
-  # scope "/api", BalloonboardWeb do
-  #   pipe_through :api
-  # end
 end

@@ -1,0 +1,1 @@
+<a class="btn btn-outline-light btn-lg" href="<%= Routes.session_stop_path(@conn, :stop, @session.id) %>">Stop</a>

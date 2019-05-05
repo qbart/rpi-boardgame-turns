@@ -8,11 +8,11 @@
     <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
     <link rel="stylesheet" href="<%= Routes.static_path(@conn, "/css/app.css") %>"/>
   </head>
-  <body>
+  <body class="bg-dark">
     <nav class="navbar navbar-dark bg-dark">
       <div class="container">
         &#x1F388;
-        <a class="btn btn-primary btn-lg" href="/sessions/new">Start</a>
+        <%= render_existing @view_module, "nav_actions." <> @view_template, assigns %>
       </div>
     </nav>
     <main role="main" class="container">
