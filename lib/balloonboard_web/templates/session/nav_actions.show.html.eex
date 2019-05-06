@@ -1,1 +1,3 @@
-<a class="btn btn-outline-light btn-lg" href="<%= Routes.session_stop_path(@conn, :stop, @session.id) %>">Stop</a>
+<%= form_for @conn, Routes.session_stop_path(@conn, :stop, @session.id), fn f -> %>
+    <%= submit "Stop", class: "btn btn-outline-light btn-lg" %>
+<% end %>

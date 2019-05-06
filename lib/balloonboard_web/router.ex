@@ -10,22 +10,19 @@ defmodule BalloonboardWeb.Router do
     plug :put_secure_browser_headers
   end
 
-  pipeline :api do
-    plug :accepts, ["json"]
-  end
+  # pipeline :api do
+  #   plug :accepts, ["json"]
+  # end
 
-  scope "/api", BalloonboardWeb do
-    pipe_through :api
-
-    resources "/sessions", Api.SessionController, only: [] do
-      post "/rounds/start", Api.RoundController, :start
-    end
-  end
+  # scope "/api", BalloonboardWeb do
+  #   pipe_through :api
+  # end
 
   scope "/", BalloonboardWeb do
     pipe_through :browser
 
     get "/", PageController, :index
+
     resources "/sessions", SessionController, only: [:new, :create, :show] do
       post "/stop", SessionController, :stop, as: :stop
     end

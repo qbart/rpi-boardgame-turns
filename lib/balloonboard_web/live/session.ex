@@ -49,11 +49,21 @@ defmodule BalloonboardWeb.Live.SessionView do
   end
 
   def handle_event("player_1", _, socket) do
-    {:noreply, update(socket, :time, fn _ -> :calendar.local_time() end)}
+    if Round.can_switch_player?(socket.assigns.session.id, 2) do
+      {:ok, _round} = Round.switch_player(socket.assigns.session.id, 2)
+      {:noreply, update(socket, :time, fn _ -> :calendar.local_time() end)}
+    else
+      {:noreply, socket}
+    end
   end
 
   def handle_event("player_2", _, socket) do
-    {:noreply, update(socket, :time, fn _ -> :calendar.local_time() end)}
+    if Round.can_switch_player?(socket.assigns.session.id, 1) do
+      {:ok, _round} = Round.switch_player(socket.assigns.session.id, 1)
+      {:noreply, update(socket, :time, fn _ -> :calendar.local_time() end)}
+    else
+      {:noreply, socket}
+    end
   end
 
   defp stats(session_id) do
