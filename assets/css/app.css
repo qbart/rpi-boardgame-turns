@@ -30,6 +30,11 @@ btn-group-xl>.btn, .btn-xl {
     font-size: 1.5rem;
 }
 
+#tags ul {
+    list-style-type: none;
+    padding: 0;
+}
+
 footer {
     position: absolute;
     bottom: 0;

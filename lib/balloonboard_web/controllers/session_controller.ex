@@ -24,7 +24,14 @@ defmodule BalloonboardWeb.SessionController do
 
   def show(conn, %{"id" => session_id} = _params) do
     session = Repo.get!(Session, session_id)
-    render(conn, "show.html", session: session)
+
+    tags =
+      Repo.all(Tag)
+      |> Enum.reduce(%{}, fn t, acc ->
+        Map.put(acc, t.player, [t.tag | Map.get(acc, t.player, [])])
+      end)
+
+    render(conn, "show.html", session: session, tags: tags)
   end
 
   def stop(conn, %{"session_id" => session_id} = _params) do

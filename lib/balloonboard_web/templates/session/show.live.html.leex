@@ -1,0 +1,58 @@
+<div id="session">
+    <div class="row">
+    <div class="col-sm">
+    <a phx-click="player_2" class="btn btn-danger btn-block btn-lg" href="">
+        <%= @stats[2].finished_rounds %>
+        <br>
+        <span class="badge badge-pill <%= badge_class(@active_2) %>">
+        <%= format(@stats[2].round_duration) %>
+        </span>
+        <span class="badge badge-pill <%= badge_class(@active_2) %>">
+        <%= format(@stats[2].total_duration) %>
+        </span>
+    </a>
+    </div>
+    <div class="col-sm">
+        <a phx-click="player_1" class="btn btn-primary btn-block btn-lg" href="">
+        <%= @stats[1].finished_rounds %>
+        <br>
+        <span class="badge badge-pill <%= badge_class(@active_1) %>">
+            <%= format(@stats[1].round_duration) %>
+        </span>
+        <span class="badge badge-pill <%= badge_class(@active_1) %>">
+            <%= format(@stats[1].total_duration) %>
+        </span>
+        </a>
+    </div>
+    </div>
+</div>
+<div id="tags">
+    <div class="row">
+        <div class="col-sm">
+            <%= if @tags[2] do %>
+                <ul>
+                    <%= for tag <- @tags[2] do %>
+                        <li>
+                            <a phx-click="tag" phx-value="<%= 2 %>:<%= tag %>" class="btn btn-outline-light">
+                                <%= tag %>
+                            </a>
+                        </li>
+                    <% end %>
+                </ul>
+            <% end %>
+        </div>
+        <div class="col-sm">
+            <%= if @tags[1] do %>
+                <ul>
+                    <%= for tag <- @tags[1] do %>
+                        <li>
+                            <a phx-click="tag" phx-value="<%= 1 %>:<%= tag %>" class="btn btn-outline-light">
+                                <%= tag %>
+                            </a>
+                        </li>
+                    <% end %>
+                </ul>
+            <% end %>
+        </div>
+    </div>
+</div>
