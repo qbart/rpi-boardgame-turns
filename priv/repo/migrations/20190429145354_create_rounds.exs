@@ -10,5 +10,6 @@ defmodule Balloonboard.Repo.Migrations.CreateRounds do
     end
 
     create index("rounds", [:session_id])
+    create index("rounds", [:started_at, :stopped_at])
   end
 end

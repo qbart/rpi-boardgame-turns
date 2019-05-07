@@ -22,6 +22,7 @@ defmodule BalloonboardWeb.Router do
     pipe_through :browser
 
     get "/", PageController, :index
+    resources "/tags", TagController, only: [:new, :create]
 
     resources "/sessions", SessionController, only: [:new, :create, :show] do
       post "/stop", SessionController, :stop, as: :stop
