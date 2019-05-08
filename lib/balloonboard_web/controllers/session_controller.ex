@@ -1,8 +1,6 @@
 defmodule BalloonboardWeb.SessionController do
   use BalloonboardWeb, :controller
   alias Balloonboard.Repo
-  alias Phoenix.LiveView
-  import Ecto.Query, only: [from: 2]
 
   def new(conn, _params) do
     render(conn, "new.html")

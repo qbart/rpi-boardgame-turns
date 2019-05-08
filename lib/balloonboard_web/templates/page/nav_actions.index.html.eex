@@ -1,2 +1,2 @@
-<a class="btn btn-primary btn-lg" href="<%= Routes.tag_path(@conn, :new) %>">Add tag</a>
+<a class="btn btn-outline-primary btn-lg" href="<%= Routes.tag_path(@conn, :new) %>">Add tag</a>
 <a class="btn btn-success btn-lg" href="<%= Routes.session_path(@conn, :new) %>">Start</a>

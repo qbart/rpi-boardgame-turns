@@ -1,0 +1,5 @@
+<%= for session <- @active_sessions do %>
+    <a class="btn btn-primary btn-xl" href="<%= Routes.session_path(@conn, :show, session.id) %>" role="button">
+        <%= session.id %>
+    </a>
+<% end %>
