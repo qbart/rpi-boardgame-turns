@@ -13,8 +13,10 @@ config :balloonboard, BalloonboardWeb.Endpoint,
   http: [:inet6, port: System.get_env("PORT") || 4000],
   url: [scheme: "https", host: "weedolingo", port: 443],
   force_ssl: [rewrite_on: [:x_forwarded_proto]],
-  cache_static_manifest: "priv/static/cache_manifest.json"
-
+  cache_static_manifest: "priv/static/cache_manifest.json",
+  live_view: [
+    signing_salt: System.get_env("LIVE_VIEW_SALT")
+  ]
 # Do not print debug messages in production
 config :logger, level: :info
 

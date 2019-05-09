@@ -2,7 +2,6 @@ defmodule Mix.Tasks.Import do
   use Mix.Task
   alias NimbleCSV.RFC4180, as: CSV
   alias Balloonboard.Repo
-  alias Ecto.Multi, as: Tx
   import Mix.EctoSQL
 
   @shortdoc "Imports old entries"
