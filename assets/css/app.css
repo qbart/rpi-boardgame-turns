@@ -52,6 +52,10 @@ btn-group-xl>.btn, .btn-xl {
     background-color: transparent !important;
 }
 
+#tags a {
+    font-family: 'NotoColorEmoji';
+}
+
 footer {
     position: absolute;
     bottom: 0;
