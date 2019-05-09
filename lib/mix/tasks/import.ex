@@ -10,6 +10,16 @@ defmodule Mix.Tasks.Import do
     {:ok, _pid, _apps} = ensure_started(Repo, [])
 
     Repo.transaction(fn ->
+      Repo.insert!(%Tag{player: 0, tag: "👮"})
+      Repo.insert!(%Tag{player: 0, tag: "🧐"})
+      Repo.insert!(%Tag{player: 0, tag: "🤯"})
+      Repo.insert!(%Tag{player: 0, tag: "🤣"})
+      Repo.insert!(%Tag{player: 0, tag: "🤫"})
+      Repo.insert!(%Tag{player: 0, tag: "💬"})
+      Repo.insert!(%Tag{player: 0, tag: "😱"})
+      Repo.insert!(%Tag{player: 1, tag: "🤮"})
+
+
       Path.wildcard("lib/mix/tasks/csv/*.csv")
       |> Enum.each(fn path ->
         IO.puts("Importing #{path}")
