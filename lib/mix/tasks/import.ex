@@ -9,32 +9,27 @@ defmodule Mix.Tasks.Import do
   def run(_) do
     {:ok, _pid, _apps} = ensure_started(Repo, [])
 
-    tx = Tx.new()
-    Path.wildcard("lib/mix/tasks/csv/*.csv")
-    |> Enum.each(fn path ->
-      IO.puts("Importing #{path}")
-      data = File.read!(path) |> CSV.parse_string(separator: ",")
-      tx
-        |> Tx.insert(:session, %Session{uid: Ecto.UUID.generate()})
-        |> Tx.run("after_insert_#{path}", fn _repo, %{session: session} ->
-          Enum.each(data, fn [player, started_at, stopped_at] ->
-            tx
-            |> Tx.insert(:round, %Round{
-              session_id: session.id,
-              player: String.to_integer(player),
-              started_at: timestamp(String.to_integer(started_at)),
-              stopped_at: timestamp(String.to_integer(stopped_at))
-            })
-            |> Repo.transaction()
-          end)
-          {:ok, nil}
+    Repo.transaction(fn ->
+      Path.wildcard("lib/mix/tasks/csv/*.csv")
+      |> Enum.each(fn path ->
+        IO.puts("Importing #{path}")
+        data = File.read!(path) |> CSV.parse_string(separator: ",")
+        session = Repo.insert!(%Session{uid: Ecto.UUID.generate()})
+
+        Enum.each(data, fn [player, started_at, stopped_at] ->
+          Repo.insert!(%Round{
+            session_id: session.id,
+            player: String.to_integer(player),
+            started_at: timestamp(String.to_integer(started_at)),
+            stopped_at: timestamp(String.to_integer(stopped_at))
+          })
         end)
-        |> Repo.transaction()
+      end)
     end)
   end
 
   def timestamp(unix_time) do
     DateTime.from_unix!(unix_time)
-    |> DateTime.to_naive
-end
+    |> DateTime.to_naive()
+  end
 end
