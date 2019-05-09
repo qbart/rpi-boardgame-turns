@@ -11,6 +11,7 @@ defmodule Mix.Tasks.Import do
 
     Repo.transaction(fn ->
       Repo.insert!(%Tag{player: 0, tag: "👮"})
+      Repo.insert!(%Tag{player: 0, tag: "🚑"})
       Repo.insert!(%Tag{player: 0, tag: "🧐"})
       Repo.insert!(%Tag{player: 0, tag: "🤯"})
       Repo.insert!(%Tag{player: 0, tag: "🤣"})
@@ -18,7 +19,7 @@ defmodule Mix.Tasks.Import do
       Repo.insert!(%Tag{player: 0, tag: "💬"})
       Repo.insert!(%Tag{player: 0, tag: "😱"})
       Repo.insert!(%Tag{player: 1, tag: "🤮"})
-
+      Repo.insert!(%Tag{player: 1, tag: "👏"})
 
       Path.wildcard("lib/mix/tasks/csv/*.csv")
       |> Enum.each(fn path ->
