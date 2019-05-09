@@ -4,11 +4,11 @@
     <a phx-click="player_2" class="btn btn-danger btn-block btn-lg" href="">
         <%= @stats[2].finished_rounds %>
         <br>
-        <span class="badge badge-pill <%= badge_class(@active_2) %>">
+        <span class="badge badge-pill round <%= badge_class(@active_2) %>">
         <%= format(@stats[2].round_duration) %>
         </span>
         <span class="badge badge-pill <%= badge_class(@active_2) %>">
-        <%= format(@stats[2].total_duration) %>
+        <%= format(@stats[2].total_duration_without_active_round) %>
         </span>
     </a>
     </div>
@@ -16,11 +16,11 @@
         <a phx-click="player_1" class="btn btn-primary btn-block btn-lg" href="">
         <%= @stats[1].finished_rounds %>
         <br>
-        <span class="badge badge-pill <%= badge_class(@active_1) %>">
+        <span class="badge badge-pill round <%= badge_class(@active_1) %>">
             <%= format(@stats[1].round_duration) %>
         </span>
         <span class="badge badge-pill <%= badge_class(@active_1) %>">
-            <%= format(@stats[1].total_duration) %>
+            <%= format(@stats[1].total_duration_without_active_round) %>
         </span>
         </a>
     </div>
@@ -29,12 +29,26 @@
 <div id="tags">
     <div class="row">
         <div class="col-sm">
+            <%= if @tags[0] do %>
+                <ul>
+                    <%= for tag <- @tags[0] do %>
+                        <li>
+                            <a phx-click="tag" phx-value="<%= 2 %>,<%= tag.id %>" class="btn btn-outline-light">
+                                <%= tag.tag %>
+                                <%= @stats[2].tags[tag.tag] %>
+                            </a>
+                        </li>
+                    <% end %>
+                </ul>
+            <% end %>
+
             <%= if @tags[2] do %>
                 <ul>
                     <%= for tag <- @tags[2] do %>
                         <li>
-                            <a phx-click="tag" phx-value="<%= 2 %>:<%= tag %>" class="btn btn-outline-light">
-                                <%= tag %>
+                            <a phx-click="tag" phx-value="<%= 2 %>,<%= tag.id %>" class="btn btn-outline-light">
+                                <%= tag.tag %>
+                                <%= @stats[2].tags[tag.tag] %>
                             </a>
                         </li>
                     <% end %>
@@ -42,12 +56,26 @@
             <% end %>
         </div>
         <div class="col-sm">
+            <%= if @tags[0] do %>
+                <ul>
+                    <%= for tag <- @tags[0] do %>
+                        <li>
+                            <a phx-click="tag" phx-value="<%= 1 %>,<%= tag.id %>" class="btn btn-outline-light">
+                                <%= tag.tag %>
+                                <%= @stats[1].tags[tag.tag] %>
+                            </a>
+                        </li>
+                    <% end %>
+                </ul>
+            <% end %>
+
             <%= if @tags[1] do %>
                 <ul>
                     <%= for tag <- @tags[1] do %>
                         <li>
-                            <a phx-click="tag" phx-value="<%= 1 %>:<%= tag %>" class="btn btn-outline-light">
-                                <%= tag %>
+                            <a phx-click="tag" phx-value="<%= 1 %>,<%= tag.id %>" class="btn btn-outline-light">
+                                <%= tag.tag %>
+                                <%= @stats[1].tags[tag.tag] %>
                             </a>
                         </li>
                     <% end %>

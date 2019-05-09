@@ -30,9 +30,26 @@ btn-group-xl>.btn, .btn-xl {
     font-size: 1.5rem;
 }
 
+#session .btn-block span.round {
+    font-size: 1.3rem;
+}
+
 #tags ul {
     list-style-type: none;
     padding: 0;
+    display: inline-block;
+}
+
+#tags li {
+    display: inline-block;
+    margin: 3px;
+}
+
+#tags a,
+#tags a:focus,
+#tags a:visited {
+    color: white;
+    background-color: transparent !important;
 }
 
 footer {

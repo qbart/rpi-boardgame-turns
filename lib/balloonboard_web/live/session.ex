@@ -1,5 +1,6 @@
 defmodule BalloonboardWeb.Live.SessionView do
   use Phoenix.LiveView
+  alias Balloonboard.Repo
 
   def render(assigns) do
     stats = stats(assigns[:session].id)
@@ -44,12 +45,23 @@ defmodule BalloonboardWeb.Live.SessionView do
   end
 
   def handle_event("tag", params, socket) do
-    IO.inspect(params)
-    {:noreply, socket}
+    case String.split(params, ",") do
+      [player, tag_id] ->
+        {:ok, _} = Repo.insert(%UsedTag{
+          session_id: socket.assigns.session.id,
+          player: String.to_integer(player),
+          tag_id: String.to_integer(tag_id),
+          tagged_at: TimeUtils.now()
+        })
+        {:noreply, update(socket, :time, fn _ -> :calendar.local_time() end)}
+
+      _ ->
+        {:noreply, socket}
+    end
   end
 
   defp stats(session_id) do
-    SessionStats.for(session_id)
+    SessionLiveStats.for(session_id)
     |> Enum.reduce(%{}, fn x, acc -> Map.put(acc, x.player, x) end)
   end
 end
