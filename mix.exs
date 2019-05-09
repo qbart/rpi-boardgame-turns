@@ -9,10 +9,12 @@ defmodule Balloonboard.MixProject do
       elixirc_paths: elixirc_paths(Mix.env()),
       compilers: [:phoenix, :gettext] ++ Mix.compilers(),
       start_permanent: Mix.env() == :prod,
+      build_embedded: Mix.env == :prod,
       aliases: aliases(),
       deps: deps()
     ]
   end
+
 
   # Configuration for the OTP application.
   #
@@ -44,6 +46,7 @@ defmodule Balloonboard.MixProject do
       {:gettext, "~> 0.11"},
       {:jason, "~> 1.0"},
       {:plug_cowboy, "~> 2.0"},
+      {:basic_auth, "~> 2.2.2"},
       {:phoenix_live_view, github: "phoenixframework/phoenix_live_view"}
     ]
   end
