@@ -26,11 +26,13 @@
     </div>
     </div>
 </div>
+
+
 <div id="tags">
     <div class="row">
         <div class="col-sm">
-            <%= if @tags[0] do %>
-                <ul>
+            <ul>
+                <%= if @tags[0] do %>
                     <%= for tag <- @tags[0] do %>
                         <li>
                             <a phx-click="tag" phx-value="<%= 2 %>,<%= tag.id %>" class="btn btn-outline-light">
@@ -39,11 +41,8 @@
                             </a>
                         </li>
                     <% end %>
-                </ul>
-            <% end %>
-
-            <%= if @tags[2] do %>
-                <ul>
+                <% end %>
+                <%= if @tags[2] do %>
                     <%= for tag <- @tags[2] do %>
                         <li>
                             <a phx-click="tag" phx-value="<%= 2 %>,<%= tag.id %>" class="btn btn-outline-light">
@@ -52,12 +51,13 @@
                             </a>
                         </li>
                     <% end %>
-                </ul>
-            <% end %>
+                <% end %>
+            </ul>
         </div>
+
         <div class="col-sm">
-            <%= if @tags[0] do %>
-                <ul>
+            <ul>
+                <%= if @tags[0] do %>
                     <%= for tag <- @tags[0] do %>
                         <li>
                             <a phx-click="tag" phx-value="<%= 1 %>,<%= tag.id %>" class="btn btn-outline-light">
@@ -66,11 +66,8 @@
                             </a>
                         </li>
                     <% end %>
-                </ul>
-            <% end %>
-
-            <%= if @tags[1] do %>
-                <ul>
+                <% end %>
+                <%= if @tags[1] do %>
                     <%= for tag <- @tags[1] do %>
                         <li>
                             <a phx-click="tag" phx-value="<%= 1 %>,<%= tag.id %>" class="btn btn-outline-light">
@@ -79,8 +76,8 @@
                             </a>
                         </li>
                     <% end %>
-                </ul>
-            <% end %>
+                <% end %>
+            </ul>
         </div>
     </div>
 </div>
