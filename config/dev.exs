@@ -24,6 +24,12 @@ config :balloonboard, BalloonboardWeb.Endpoint,
     signing_salt: "E5beh4j5uaLtWHrLdhaFMgMXz7kK5mkTbh5tBsZbsKHbpB4reGfWLajnVkyuTfUO"
   ]
 
+  config :basic_auth, simple_auth: [
+    username: "dev",
+    password: "dev",
+    realm:    "Login"
+  ]
+
 # ## SSL Support
 #
 # In order to use HTTPS in development, a self-signed

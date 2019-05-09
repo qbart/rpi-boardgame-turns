@@ -2,7 +2,7 @@ defmodule BalloonboardWeb.Router do
   use BalloonboardWeb, :router
 
   pipeline :browser do
-    plug BasicAuth, use_config: {:your_app, :your_config}
+    plug BasicAuth, use_config: {:basic_auth, :simple_auth}
     plug :accepts, ["html"]
     plug :fetch_session
     plug :fetch_flash
