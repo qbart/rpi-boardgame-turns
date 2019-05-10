@@ -1,6 +1,7 @@
 defmodule BalloonboardWeb.SessionController do
   use BalloonboardWeb, :controller
   alias Balloonboard.Repo
+  import Ecto.Query, only: [from: 2]
 
   def new(conn, _params) do
     render(conn, "new.html")
@@ -33,7 +34,13 @@ defmodule BalloonboardWeb.SessionController do
   end
 
   def stop(conn, %{"session_id" => session_id} = _params) do
-    Round.clear_unstopped(String.to_integer(session_id))
+    Repo.transaction(fn ->
+      Round.clear_unstopped(String.to_integer(session_id))
+
+      from(s in Session, where: s.id == ^session_id)
+      |> Repo.update_all(set: [active: false])
+    end)
+
     redirect(conn, to: Routes.page_path(conn, :index))
   end
 end
