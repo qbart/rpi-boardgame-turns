@@ -1,3 +1,4 @@
 <a class="btn btn-outline-danger btn-lg" href="javascript:window.close()">Quit</a>
+<a class="btn btn-outline-primary btn-lg" href="<%= Routes.archive_session_path(@conn, :index) %>">Archive</a>
 <a class="btn btn-outline-primary btn-lg" href="<%= Routes.tag_path(@conn, :new) %>">Add tag</a>
 <a class="btn btn-success btn-lg" href="<%= Routes.session_path(@conn, :new) %>">Start</a>
