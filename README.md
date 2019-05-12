@@ -18,3 +18,18 @@ Repo.delete(session)
 ```ex
 UsedTag.update_comment!(0, "")
 ```
+
+
+## TODO
+
+- fairy dust flag
+- confirm on stop
+- timeline
+- multiplayer support
+- avatars
+
+## Notes
+
+session_id: 28 (fairy dust)
+
+session at 27.04.2019 (TC error)
