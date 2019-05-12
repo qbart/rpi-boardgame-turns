@@ -4,7 +4,7 @@ defmodule BalloonboardWeb.SessionView do
   defp badge_class(true), do: "badge-success"
   defp badge_class(false), do: "badge-warning"
 
-  defp format(duration) do
+  def format_duration(duration) do
     m = div(duration, 60) |> Integer.to_string() |> String.pad_leading(2, "0")
     s = rem(duration, 60) |> Integer.to_string() |> String.pad_leading(2, "0")
     "#{m}:#{s}"

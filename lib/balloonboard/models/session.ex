@@ -8,6 +8,7 @@ defmodule Session do
     timestamps()
 
     has_many :rounds, Round
+    has_many :used_tags, UsedTag
   end
 
   def changeset(session, params \\ %{}) do

@@ -5,10 +5,10 @@
                 <%= @stats[2].finished_rounds %>
                 <br>
                 <span class="badge badge-pill round <%= badge_class(@active_2) %>">
-                <%= format(@stats[2].round_duration) %>
+                <%= format_duration(@stats[2].round_duration) %>
                 </span>
                 <span class="badge badge-pill <%= badge_class(@active_2) %>">
-                <%= format(@stats[2].total_duration_without_active_round) %>
+                <%= format_duration(@stats[2].total_duration_without_active_round) %>
                 </span>
             </a>
         </div>
@@ -18,10 +18,10 @@
                 <%= @stats[1].finished_rounds %>
                 <br>
                 <span class="badge badge-pill round <%= badge_class(@active_1) %>">
-                    <%= format(@stats[1].round_duration) %>
+                    <%= format_duration(@stats[1].round_duration) %>
                 </span>
                 <span class="badge badge-pill <%= badge_class(@active_1) %>">
-                    <%= format(@stats[1].total_duration_without_active_round) %>
+                    <%= format_duration(@stats[1].total_duration_without_active_round) %>
                 </span>
             </a>
         </div>

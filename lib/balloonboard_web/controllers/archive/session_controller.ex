@@ -9,7 +9,18 @@ defmodule BalloonboardWeb.Archive.SessionController do
   end
 
   def show(conn, %{"id" => session_id} = _params) do
-    session = Repo.get!(Session, session_id)
-    render(conn, "show.html", session: session)
+    session =
+      Repo.get!(Session, session_id)
+      |> Repo.preload(used_tags: [:tag])
+
+    rounds =
+      Repo.all(
+        from r in Round,
+          where: r.session_id == ^session.id,
+          order_by: :started_at
+      )
+      |> Enum.chunk_every(2)
+
+    render(conn, "show.html", session: session, rounds: rounds)
   end
 end

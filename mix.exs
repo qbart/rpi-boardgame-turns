@@ -22,7 +22,11 @@ defmodule Balloonboard.MixProject do
   def application do
     [
       mod: {Balloonboard.Application, []},
-      extra_applications: [:logger, :runtime_tools]
+      extra_applications: [
+        :timex,
+        :logger,
+        :runtime_tools
+      ]
     ]
   end
 
@@ -45,6 +49,7 @@ defmodule Balloonboard.MixProject do
       {:phoenix_live_reload, "~> 1.2", only: :dev},
       {:gettext, "~> 0.11"},
       {:jason, "~> 1.0"},
+      {:timex, "~> 3.1"},
       {:plug_cowboy, "~> 2.0"},
       {:basic_auth, "~> 2.2.2"},
       {:phoenix_live_view, github: "phoenixframework/phoenix_live_view"}

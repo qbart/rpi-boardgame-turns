@@ -1,1 +1,33 @@
-        <%= @session.id %>
+🆔<%= @session.id %>
+<hr>
+
+<%= for group <- @rounds do %>
+<div class="row">
+    <%= for round <- group do %>
+        <div class="col-sm">
+            🆔<%= round.id %>
+            &nbsp;&nbsp;
+            <strong>👤<%= round.player %></strong>
+            &nbsp;&nbsp;
+            🎈 <%= format_datetime(round.started_at) %>
+            &nbsp;
+            🏁 <%= format_datetime(round.stopped_at) %>
+            &nbsp;&nbsp;
+            <span class="badge badge-light">
+                <%= diff_datetime(round.started_at, round.stopped_at) %>
+            </span>
+        </div>
+    <% end %>
+</div>
+<% end %>
+
+<hr>
+
+<div>
+    <%= for u <- Enum.sort(@session.used_tags, &(&1.tagged_at <= &2.tagged_at)) do %>
+        <span class="badge badge-dark">
+            🆔<%= u.id %>👤<%= u.player %> <%= u.tag.tag %>
+            <%= u.comment %>
+        </span>
+    <% end %>
+</div>
