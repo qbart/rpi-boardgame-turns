@@ -1,20 +1,20 @@
 # Balloonboard
 
-To start your Phoenix server:
+## Script for restore
 
-  * Install dependencies with `mix deps.get`
-  * Create and migrate your database with `mix ecto.setup`
-  * Install Node.js dependencies with `cd assets && npm install`
-  * Start Phoenix endpoint with `mix phx.server`
 
-Now you can visit [`localhost:4000`](http://localhost:4000) from your browser.
+```ex
+alias Balloonboard.Repo
+rb = Repo.get!(Round, 374)
+re = Repo.get!(Round, 376)
+Repo.insert!(%Round{session_id: 28, started_at: rb.stopped_at, stopped_at: re.started_at, player: 2})
+```
 
-Ready to run in production? Please [check our deployment guides](https://hexdocs.pm/phoenix/deployment.html).
+```ex
+session = Repo.get!(Session, 29)
+Repo.delete(session)
+```
 
-## Learn more
-
-  * Official website: http://www.phoenixframework.org/
-  * Guides: https://hexdocs.pm/phoenix/overview.html
-  * Docs: https://hexdocs.pm/phoenix
-  * Mailing list: http://groups.google.com/group/phoenix-talk
-  * Source: https://github.com/phoenixframework/phoenix
+```ex
+UsedTag.update_comment!(0, "")
+```
