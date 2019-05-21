@@ -12,6 +12,7 @@ defmodule SessionLiveStats do
     field :round_duration, :integer
     field :total_duration, :integer
     field :total_duration_without_active_round, :integer
+    field :tags, :map
   end
 
   def for(session_id) do

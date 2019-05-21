@@ -5,6 +5,7 @@ defmodule Session do
   schema "sessions" do
     field :uid, Ecto.UUID
     field :active, :boolean
+    field :config, :map
     timestamps()
 
     has_many :rounds, Round
