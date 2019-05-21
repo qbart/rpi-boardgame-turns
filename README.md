@@ -19,13 +19,17 @@ Repo.delete(session)
 UsedTag.update_comment!(0, "")
 ```
 
+```
+update sessions set config = '{"dust":true}' where id = 28;
+```
 
 ## TODO
 
 - confirm on stop
 - multiplayer support
 - avatars
-- timeline
+- display all data (dust)
+- timeline per session
 
 ## Notes
 
