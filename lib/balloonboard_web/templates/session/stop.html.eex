@@ -1,0 +1,14 @@
+<h1>
+Are you sure?
+</h1>
+
+<div class="row">
+  <div class="col-sm">
+    <a class="btn btn-success btn-xl" href="<%= Routes.session_path(@conn, :show, @session.id) %>">No, go back</a>
+  </div>
+  <div class="col-sm">
+    <%= form_for @conn, Routes.session_quit_path(@conn, :quit, @session.id), fn _f -> %>
+        <%= submit "Yes, STOP", class: "btn btn-danger btn-lg" %>
+    <% end %>
+  </div>
+</div>

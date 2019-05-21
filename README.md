@@ -25,7 +25,6 @@ update sessions set config = '{"dust":true}' where id = 28;
 
 ## TODO
 
-- confirm on stop
 - multiplayer support
 - avatars
 - display all data (dust)

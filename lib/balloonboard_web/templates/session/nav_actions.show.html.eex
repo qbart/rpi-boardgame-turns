@@ -1,4 +1,2 @@
 <a class="btn btn-outline-primary btn-lg" href="<%= Routes.page_path(@conn, :index) %>">Back</a>
-<%= form_for @conn, Routes.session_stop_path(@conn, :stop, @session.id), fn _f -> %>
-    <%= submit "Stop", class: "btn btn-outline-light btn-lg" %>
-<% end %>
+<a class="btn btn-outline-light btn-lg" href="<%= Routes.session_stop_path(@conn, :stop, @session.id) %>">Stop</a>

@@ -34,6 +34,11 @@ defmodule BalloonboardWeb.SessionController do
   end
 
   def stop(conn, %{"session_id" => session_id} = _params) do
+    session = Repo.get!(Session, session_id)
+    render(conn, "stop.html", session: session)
+  end
+
+  def quit(conn, %{"session_id" => session_id} = _params) do
     Repo.transaction(fn ->
       Round.clear_unstopped(String.to_integer(session_id))
 
