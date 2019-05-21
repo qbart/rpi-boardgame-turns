@@ -61,10 +61,28 @@ footer {
     bottom: 0;
 }
 
+footer.right {
+    right: 0;
+}
+
+footer.right * {
+    margin-right: 8px;
+    margin-bottom: 8px;
+}
+
 .btn-rect {
     width: 16vh;
     height: 16vh;
     margin-right: 8px;
     margin-bottom: 8px;
     font-size: 1.5rem;
+}
+
+#picker .player {
+    margin-bottom: 8px;
+}
+
+#picker .player img {
+    width: 16vh;
+    height: 16vh;
 }

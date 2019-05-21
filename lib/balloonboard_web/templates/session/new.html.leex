@@ -1,0 +1,6 @@
+<%= form_for @conn, Routes.session_path(@conn, :create), fn f -> %>
+    <%= live_render(@conn, BalloonboardWeb.Live.SessionNewView, session: %{players: @players, active_players: @active_players}) %>
+    <footer class="right">
+      <%= submit "Adventure time", class: "btn btn-success" %>
+    </footer>
+<% end %>

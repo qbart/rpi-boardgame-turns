@@ -4,20 +4,12 @@ defmodule BalloonboardWeb.SessionController do
   import Ecto.Query, only: [from: 2]
 
   def new(conn, _params) do
-    render(conn, "new.html")
+    players = Repo.all(Player)
+    render(conn, "new.html", players: players, active_players: [])
   end
 
-  def create(conn, %{"player" => player} = _params) do
-    {:ok, session} = Repo.insert(%Session{uid: Ecto.UUID.generate()})
-
-    {:ok, _round} =
-      Repo.insert(%Round{
-        session_id: session.id,
-        player: String.to_integer(player),
-        started_at: TimeUtils.now(),
-        stopped_at: nil
-      })
-
+  def create(conn, %{"players" => players} = _params) do
+    {:ok, session} = Session.start(Enum.map(players, &String.to_integer(&1)))
     redirect(conn, to: Routes.session_path(conn, :show, session.id))
   end
 

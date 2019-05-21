@@ -1,0 +1,34 @@
+<div id="picker">
+    <div class="row">
+        <div class="col-sm">
+            <h2>Inactive</h2>
+            <%= for p <- @players do %>
+                <div>
+                    <a phx-click="select" phx-value="<%= p.id %>">
+                        <div class="player">
+                            <%= img_tag(avatar_url(p.avatar)) %>
+                            <%= p.name %>
+                        </div>
+                    </a>
+                </div>
+            <% end %>
+        </div>
+
+        <div class="col-sm">
+            <h2>Active</h2>
+            <ol>
+                <%= for p <- @active_players do %>
+                    <li>
+                        <a phx-click="deselect" phx-value="<%= p.id %>">
+                            <div class="player">
+                                <input type="hidden" name="players[]" value="<%= p.id %>">
+                                <%= img_tag(avatar_url(p.avatar)) %>
+                                <%= p.name %>
+                            </div>
+                        </a>
+                    </li>
+                <% end %>
+            </ol>
+        </div>
+    </div>
+</div>

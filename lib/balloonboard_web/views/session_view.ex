@@ -9,4 +9,9 @@ defmodule BalloonboardWeb.SessionView do
     s = rem(duration, 60) |> Integer.to_string() |> String.pad_leading(2, "0")
     "#{m}:#{s}"
   end
+
+  def avatar_url(avatar) do
+    avatar
+    |> String.replace("file://", "/images/avatars")
+  end
 end
