@@ -3,10 +3,10 @@ defmodule UsedTag do
   alias Balloonboard.Repo
 
   schema "used_tags" do
-    field :player, :integer
     field :tagged_at, :naive_datetime
     field :comment, :string
 
+    belongs_to :player, Player
     belongs_to :session, Session
     belongs_to :tag, Tag
   end

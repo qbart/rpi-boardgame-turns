@@ -22,10 +22,20 @@ defmodule Session do
   def start(player_ids) do
     Repo.transaction(fn ->
       session = Repo.insert!(%Session{uid: Ecto.UUID.generate()})
-      # TODO add active player
+
+      player_ids
+      |> Enum.with_index()
+      |> Enum.each(fn {id, index} ->
+        Repo.insert!(%ActivePlayer{
+          player_id: id,
+          session_id: session.id,
+          position: index + 1
+        })
+      end)
+
       Repo.insert!(%Round{
         session_id: session.id,
-        player: List.first(player_ids),
+        player_id: List.first(player_ids),
         started_at: TimeUtils.now(),
         stopped_at: nil
       })

@@ -7,8 +7,8 @@ defmodule Round do
   schema "rounds" do
     field :started_at, :naive_datetime
     field :stopped_at, :naive_datetime
-    field :player, :integer
 
+    belongs_to :player, Player
     belongs_to :session, Session
   end
 
@@ -24,19 +24,19 @@ defmodule Round do
 
     Repo.insert(%Round{
       session_id: session_id,
-      player: player,
+      player_id: player,
       started_at: now,
       stopped_at: nil
     })
   end
 
-  def can_switch_player?(session_id, player) do
+  def can_player_finish?(session_id, player) do
     Repo.exists?(
       from r in Round,
         where:
           r.session_id == ^session_id and
             is_nil(r.stopped_at) and
-            r.player != ^player
+            r.player_id == ^player
     )
   end
 

@@ -1,84 +1,49 @@
 <div id="session">
     <div class="row">
-        <div class="col-sm">
-            <a phx-click="player_2" class="btn btn-danger btn-block btn-lg">
-                <%= @stats[2].finished_rounds %>
-                <br>
-                <span class="badge badge-pill round <%= badge_class(@active_2) %>">
-                <%= format_duration(@stats[2].round_duration) %>
-                </span>
-                <span class="badge badge-pill <%= badge_class(@active_2) %>">
-                <%= format_duration(@stats[2].total_duration_without_active_round) %>
-                </span>
-            </a>
-        </div>
-
-        <div class="col-sm">
-            <a phx-click="player_1" class="btn btn-primary btn-block btn-lg">
-                <%= @stats[1].finished_rounds %>
-                <br>
-                <span class="badge badge-pill round <%= badge_class(@active_1) %>">
-                    <%= format_duration(@stats[1].round_duration) %>
-                </span>
-                <span class="badge badge-pill <%= badge_class(@active_1) %>">
-                    <%= format_duration(@stats[1].total_duration_without_active_round) %>
-                </span>
-            </a>
-        </div>
+        <%= for player <- @active_players do %>
+            <div class="col-sm">
+                <a phx-click="player" phx-value="<%= player %>" class="btn btn-block btn-lg active-<%= @active[player] %>" style="background: <%= @players[player].color %> url(<%= avatar_url(@players[player].avatar) %>) no-repeat center center; background-size: 32vh 32vh;">
+                    <span class="round">
+                        <%= @stats[player].finished_rounds %>
+                    </span>
+                    <span class="badge badge-pill duration <%= badge_class(@active[player]) %>">
+                    <%= format_duration(@stats[player].round_duration) %>
+                    •
+                    <%= format_duration(@stats[player].total_duration_without_active_round) %>
+                    </span>
+                </a>
+            </div>
+        <% end %>
     </div>
 </div>
 
-
 <div id="tags">
     <div class="row">
-        <div class="col-sm">
-            <ul>
-                <%= if @tags[0] do %>
-                    <%= for tag <- @tags[0] do %>
-                        <li>
-                            <a phx-click="tag" phx-value="<%= 2 %>,<%= tag.id %>" class="btn btn-outline-light">
-                                <%= tag.tag %>
-                                <%= @stats[2].tags[tag.tag] %>
-                            </a>
-                        </li>
+        <%= for player <- @active_players do %>
+            <div class="col-sm">
+                <ul>
+                    <%= if @tags[0] do %>
+                        <%= for tag <- @tags[0] do %>
+                            <li>
+                                <a phx-click="tag" phx-value="<%= player %>,<%= tag.id %>" class="btn btn-outline-light">
+                                    <%= tag.tag %>
+                                    <%= @stats[player].tags[tag.tag] %>
+                                </a>
+                            </li>
+                        <% end %>
                     <% end %>
-                <% end %>
-                <%= if @tags[2] do %>
-                    <%= for tag <- @tags[2] do %>
-                        <li>
-                            <a phx-click="tag" phx-value="<%= 2 %>,<%= tag.id %>" class="btn btn-outline-light">
-                                <%= tag.tag %>
-                                <%= @stats[2].tags[tag.tag] %>
-                            </a>
-                        </li>
+                    <%= if @tags[player] do %>
+                        <%= for tag <- @tags[player] do %>
+                            <li>
+                                <a phx-click="tag" phx-value="<%= player %>,<%= tag.id %>" class="btn btn-outline-light">
+                                    <%= tag.tag %>
+                                    <%= @stats[player].tags[tag.tag] %>
+                                </a>
+                            </li>
+                        <% end %>
                     <% end %>
-                <% end %>
-            </ul>
-        </div>
-
-        <div class="col-sm">
-            <ul>
-                <%= if @tags[0] do %>
-                    <%= for tag <- @tags[0] do %>
-                        <li>
-                            <a phx-click="tag" phx-value="<%= 1 %>,<%= tag.id %>" class="btn btn-outline-light">
-                                <%= tag.tag %>
-                                <%= @stats[1].tags[tag.tag] %>
-                            </a>
-                        </li>
-                    <% end %>
-                <% end %>
-                <%= if @tags[1] do %>
-                    <%= for tag <- @tags[1] do %>
-                        <li>
-                            <a phx-click="tag" phx-value="<%= 1 %>,<%= tag.id %>" class="btn btn-outline-light">
-                                <%= tag.tag %>
-                                <%= @stats[1].tags[tag.tag] %>
-                            </a>
-                        </li>
-                    <% end %>
-                <% end %>
-            </ul>
-        </div>
+                </ul>
+            </div>
+        <% end %>
     </div>
 </div>

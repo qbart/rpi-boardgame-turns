@@ -7,7 +7,7 @@
         <div class="col-sm">
             🆔<%= round.id %>
             &nbsp;&nbsp;
-            <strong>👤<%= round.player %></strong>
+            <strong>👤<%= round.player_id %></strong>
             &nbsp;&nbsp;
             🎈 <%= format_datetime(round.started_at) %>
             &nbsp;
@@ -26,7 +26,7 @@
 <div>
     <%= for u <- Enum.sort(@session.used_tags, &(&1.tagged_at <= &2.tagged_at)) do %>
         <span class="badge badge-dark">
-            🆔<%= u.id %>👤<%= u.player %> <%= u.tag.tag %>
+            🆔<%= u.id %>👤<%= u.player_id %> <%= u.tag.tag %>
             <%= u.comment %>
         </span>
     <% end %>

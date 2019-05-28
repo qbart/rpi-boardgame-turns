@@ -13,13 +13,16 @@ defmodule BalloonboardWeb.Archive.SessionController do
       Repo.get!(Session, session_id)
       |> Repo.preload(used_tags: [:tag])
 
+    player_count =
+      Repo.aggregate(from(p in ActivePlayer, where: p.session_id == ^session_id), :count, :id)
+
     rounds =
       Repo.all(
         from r in Round,
           where: r.session_id == ^session.id,
           order_by: :started_at
       )
-      |> Enum.chunk_every(2)
+      |> Enum.chunk_every(player_count)
 
     render(conn, "show.html", session: session, rounds: rounds)
   end

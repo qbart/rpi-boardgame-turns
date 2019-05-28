@@ -1,88 +1,95 @@
 /* This file is for your main application css. */
 
-btn-group-xl>.btn, .btn-xl {
-    padding: .10rem 2rem;
-    font-size: 2.5rem;
-    line-height: 3;
-    border-radius: .6rem;
+btn-group-xl > .btn,
+.btn-xl {
+  padding: 0.1rem 2rem;
+  font-size: 2.5rem;
+  line-height: 3;
+  border-radius: 0.6rem;
 }
 
 .bg-dark {
-    color: #fff;
+  color: #fff;
 }
 
 #session {
-    height: 40vh;
-    padding: 10px 0;
+  height: 40vh;
+  padding: 10px 0;
 }
 
 #session .row,
 #session .col-sm {
-    height: 100%;
+  height: 100%;
 }
 
 #session .btn-block {
-    height: 100%;
-    font-size: 3rem;
+  height: 100%;
 }
 
-#session .btn-block span {
-    font-size: 1.5rem;
+#session span.duration {
+  display: inline-block;
+  font-size: 1.3rem;
 }
 
-#session .btn-block span.round {
-    font-size: 1.3rem;
+#session span.round {
+  font-size: 1.3rem;
+  text-shadow: 2px 2px #000000;
+}
+
+#session .active-false {
+  height: 80%;
+  margin-top: 10%;
 }
 
 #tags ul {
-    list-style-type: none;
-    padding: 0;
-    display: inline-block;
+  list-style-type: none;
+  padding: 0;
+  display: inline-block;
 }
 
 #tags li {
-    display: inline-block;
-    margin: 3px;
+  display: inline-block;
+  margin: 3px;
 }
 
 #tags a,
 #tags a:focus,
 #tags a:visited {
-    color: white;
-    background-color: transparent !important;
+  color: white;
+  background-color: transparent !important;
 }
 
 #tags a {
-    font-family: 'NotoColorEmoji';
+  font-family: "NotoColorEmoji";
 }
 
 footer {
-    position: absolute;
-    bottom: 0;
+  position: absolute;
+  bottom: 0;
 }
 
 footer.right {
-    right: 0;
+  right: 0;
 }
 
 footer.right * {
-    margin-right: 8px;
-    margin-bottom: 8px;
+  margin-right: 8px;
+  margin-bottom: 8px;
 }
 
 .btn-rect {
-    width: 16vh;
-    height: 16vh;
-    margin-right: 8px;
-    margin-bottom: 8px;
-    font-size: 1.5rem;
+  width: 16vh;
+  height: 16vh;
+  margin-right: 8px;
+  margin-bottom: 8px;
+  font-size: 1.5rem;
 }
 
 #picker .player {
-    margin-bottom: 8px;
+  margin-bottom: 8px;
 }
 
 #picker .player img {
-    width: 16vh;
-    height: 16vh;
+  width: 16vh;
+  height: 16vh;
 }

@@ -3,16 +3,19 @@ defmodule BalloonboardWeb.Live.SessionView do
   alias Balloonboard.Repo
 
   def render(assigns) do
-    stats = stats(assigns[:session].id)
-    tags = assigns[:tags]
-    active_2 = stats[2].round_duration > 0
-    active_1 = stats[1].round_duration > 0
+    stats = stats(assigns.session.id)
+
+    active =
+      Enum.reduce(assigns.active_players, %{}, fn id, acc ->
+        Map.put(acc, id, stats[id].round_duration > 0)
+      end)
 
     BalloonboardWeb.SessionView.render("show.live.html", %{
-      active_1: active_1,
-      active_2: active_2,
+      active: active,
       stats: stats,
-      tags: tags
+      tags: assigns.tags,
+      players: assigns.players,
+      active_players: assigns.active_players
     })
   end
 
@@ -26,18 +29,12 @@ defmodule BalloonboardWeb.Live.SessionView do
     {:noreply, assign(socket, time: :calendar.local_time())}
   end
 
-  def handle_event("player_1", _, socket) do
-    if Round.can_switch_player?(socket.assigns.session.id, 2) do
-      {:ok, _round} = Round.switch_player(socket.assigns.session.id, 2)
-      {:noreply, update(socket, :time, fn _ -> :calendar.local_time() end)}
-    else
-      {:noreply, socket}
-    end
-  end
+  def handle_event("player", param_id, socket) do
+    player_id = String.to_integer(param_id)
 
-  def handle_event("player_2", _, socket) do
-    if Round.can_switch_player?(socket.assigns.session.id, 1) do
-      {:ok, _round} = Round.switch_player(socket.assigns.session.id, 1)
+    if Round.can_player_finish?(socket.assigns.session.id, player_id) do
+      next_player_id = next_player(socket.assigns.active_players, player_id)
+      {:ok, _round} = Round.switch_player(socket.assigns.session.id, next_player_id)
       {:noreply, update(socket, :time, fn _ -> :calendar.local_time() end)}
     else
       {:noreply, socket}
@@ -47,12 +44,14 @@ defmodule BalloonboardWeb.Live.SessionView do
   def handle_event("tag", params, socket) do
     case String.split(params, ",") do
       [player, tag_id] ->
-        {:ok, _} = Repo.insert(%UsedTag{
-          session_id: socket.assigns.session.id,
-          player: String.to_integer(player),
-          tag_id: String.to_integer(tag_id),
-          tagged_at: TimeUtils.now()
-        })
+        {:ok, _} =
+          Repo.insert(%UsedTag{
+            session_id: socket.assigns.session.id,
+            player_id: String.to_integer(player),
+            tag_id: String.to_integer(tag_id),
+            tagged_at: TimeUtils.now()
+          })
+
         {:noreply, update(socket, :time, fn _ -> :calendar.local_time() end)}
 
       _ ->
@@ -62,6 +61,11 @@ defmodule BalloonboardWeb.Live.SessionView do
 
   defp stats(session_id) do
     SessionLiveStats.for(session_id)
-    |> Enum.reduce(%{}, fn x, acc -> Map.put(acc, x.player, x) end)
+    |> Enum.reduce(%{}, fn x, acc -> Map.put(acc, x.player_id, x) end)
+  end
+
+  defp next_player(players, current) do
+    index = Enum.find_index(players, fn p -> p == current end)
+    Enum.at(players, index + 1) || List.first(players)
   end
 end

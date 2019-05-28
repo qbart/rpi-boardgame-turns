@@ -4,7 +4,7 @@
   <div class="col-sm">
     <%= form_for @changeset, Routes.tag_path(@conn, :create), fn f -> %>
       <label>
-        Player: <%= select f, :player, 0..2 %>
+        Player: <%= select f, :player_id, 0..2 %>
       </label>
 
       <label>

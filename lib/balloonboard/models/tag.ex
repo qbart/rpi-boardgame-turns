@@ -3,13 +3,14 @@ defmodule Tag do
   import Ecto.Changeset
 
   schema "tags" do
-    field :player, :integer
     field :tag, :string
+
+    belongs_to :player, Player
   end
 
   def changeset(tag, params \\ %{}) do
     tag
-    |> cast(params, [:player, :tag])
-    |> validate_required([:player, :tag])
+    |> cast(params, [:player_id, :tag])
+    |> validate_required([:player_id, :tag])
   end
 end

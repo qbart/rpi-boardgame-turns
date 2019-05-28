@@ -1,7 +1,7 @@
 defmodule BalloonboardWeb.SessionController do
   use BalloonboardWeb, :controller
   alias Balloonboard.Repo
-  import Ecto.Query, only: [from: 2]
+  import Ecto.Query
 
   def new(conn, _params) do
     players = Repo.all(Player)
@@ -19,10 +19,28 @@ defmodule BalloonboardWeb.SessionController do
     tags =
       Repo.all(Tag)
       |> Enum.reduce(%{}, fn t, acc ->
-        Map.put(acc, t.player, [%{tag: t.tag, id: t.id} | Map.get(acc, t.player, [])])
+        Map.put(acc, t.player_id, [%{tag: t.tag, id: t.id} | Map.get(acc, t.player_id, [])])
       end)
 
-    render(conn, "show.html", session: session, tags: tags)
+    active_players =
+      from(a in ActivePlayer, where: a.session_id == ^session_id, order_by: [:position])
+      |> Repo.all()
+      |> Enum.map(fn p -> p.player_id end)
+
+    players =
+      Player
+      |> where([p], p.id in ^active_players)
+      |> Repo.all()
+      |> Enum.reduce(%{}, fn p, acc ->
+        Map.put(acc, p.id, p)
+      end)
+
+    render(conn, "show.html",
+      session: session,
+      tags: tags,
+      active_players: active_players,
+      players: players
+    )
   end
 
   def stop(conn, %{"session_id" => session_id} = _params) do

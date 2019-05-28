@@ -21,7 +21,7 @@ defmodule SessionLiveStats do
         where: s.session_id == ^session_id,
         select:
           map(s, [
-            :player,
+            :player_id,
             :finished_rounds,
             :tags,
             :round_duration,
