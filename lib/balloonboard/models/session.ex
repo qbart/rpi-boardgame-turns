@@ -1,4 +1,5 @@
 defmodule Session do
+  alias Balloonboard.Repo
   use Ecto.Schema
   import Ecto.Changeset
 
@@ -10,6 +11,11 @@ defmodule Session do
 
     has_many :rounds, Round
     has_many :used_tags, UsedTag
+  end
+
+  def destroy(id) do
+    session = Repo.get(Session, id)
+    Repo.delete!(session)
   end
 
   def changeset(session, params \\ %{}) do
