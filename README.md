@@ -1,4 +1,6 @@
-# Balloonboard
+# rpi-boardgame-turns
+
+Web application for measuring turns in board games. Used for Raspberry PI with touchscreen 800x480.
 
 ## Script for restore
 
