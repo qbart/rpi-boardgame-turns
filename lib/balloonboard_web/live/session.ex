@@ -15,6 +15,7 @@ defmodule BalloonboardWeb.Live.SessionView do
       end)
 
     BalloonboardWeb.SessionView.render("show.live.html", %{
+      tag_href: assigns.tag_href,
       players: assigns.players,
       active_players: assigns.active_players,
       rounds: rounds

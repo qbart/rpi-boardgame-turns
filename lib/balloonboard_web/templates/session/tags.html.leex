@@ -1,0 +1,11 @@
+<%= form_for @conn, Routes.session_path(@conn, :create), fn f -> %>
+  <%= live_render(
+    @conn,
+    BalloonboardWeb.Live.TagsView, session: %{
+      session: @session,
+      players: @players,
+      active_players: @active_players,
+      selected_players: [],
+      selected_tags: []
+  }) %>
+<% end %>

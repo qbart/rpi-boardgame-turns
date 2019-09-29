@@ -28,6 +28,7 @@ defmodule BalloonboardWeb.Router do
 
     resources "/sessions", SessionController, only: [:new, :create, :show] do
       get "/stop", SessionController, :stop, as: :stop
+      get "/tags", SessionController, :tags, as: :tags
       post "/quit", SessionController, :quit, as: :quit
     end
 

@@ -4,6 +4,7 @@
     session: @session,
     players: @players,
     active_players: @active_players,
-    rounds: @rounds
+    rounds: @rounds,
+    tag_href: Routes.session_tags_path(@conn, :tags, @session.id)
 }) %>
 <footer>Session ID: <%= @session.id %></footer>
