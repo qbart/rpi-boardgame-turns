@@ -93,3 +93,44 @@ footer.right * {
   width: 16vh;
   height: 16vh;
 }
+
+.avatar {
+  width: 12vh;
+  height: 12vh;
+}
+
+#session .round {
+  font-weight: 600;
+  font-size: 8vh;
+  padding: 10px;
+}
+
+#session .round-duration,
+#session .total-duration {
+  padding: 10px;
+  font-size: 2.5vh;
+}
+
+#session .total-duration {
+  font-weight: 600;
+}
+
+#session .index {
+  font-size: 1.5vh;
+}
+
+#session #bt-next {
+  position: absolute;
+  width: 32vh;
+  height: 32vh;
+  right: 0;
+  top: 0;
+}
+
+#session #bt-tag {
+  position: absolute;
+  width: 16vh;
+  height: 16vh;
+  right: 0;
+  top: 40vh;
+}

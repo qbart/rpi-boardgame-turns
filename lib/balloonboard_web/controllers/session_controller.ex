@@ -16,20 +16,15 @@ defmodule BalloonboardWeb.SessionController do
   def show(conn, %{"id" => session_id} = _params) do
     session = Repo.get!(Session, session_id)
 
-    tags =
-      Repo.all(Tag)
-      |> Enum.reduce(%{}, fn t, acc ->
-        Map.put(acc, t.player_id, [%{tag: t.tag, id: t.id} | Map.get(acc, t.player_id, [])])
-      end)
-
     active_players =
-      from(a in ActivePlayer, where: a.session_id == ^session_id, order_by: [:position])
+      from(a in ActivePlayer, where: a.session_id == ^session.id, order_by: [:position])
       |> Repo.all()
-      |> Enum.map(fn p -> p.player_id end)
+
+    active_player_ids = Enum.map(active_players, fn p -> p.player_id end)
 
     players =
       Player
-      |> where([p], p.id in ^active_players)
+      |> where([p], p.id in ^active_player_ids)
       |> Repo.all()
       |> Enum.reduce(%{}, fn p, acc ->
         Map.put(acc, p.id, p)
@@ -37,9 +32,9 @@ defmodule BalloonboardWeb.SessionController do
 
     render(conn, "show.html",
       session: session,
-      tags: tags,
       active_players: active_players,
-      players: players
+      players: players,
+      rounds: %{}
     )
   end
 

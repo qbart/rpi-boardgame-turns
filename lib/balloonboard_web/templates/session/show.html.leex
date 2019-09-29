@@ -1,2 +1,9 @@
-<%= live_render(@conn, BalloonboardWeb.Live.SessionView, session: %{session: @session, tags: @tags, players: @players, active_players: @active_players}) %>
+<%= live_render(
+  @conn,
+  BalloonboardWeb.Live.SessionView, session: %{
+    session: @session,
+    players: @players,
+    active_players: @active_players,
+    rounds: @rounds
+}) %>
 <footer>Session ID: <%= @session.id %></footer>

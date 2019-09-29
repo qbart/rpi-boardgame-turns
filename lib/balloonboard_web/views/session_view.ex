@@ -2,7 +2,7 @@ defmodule BalloonboardWeb.SessionView do
   use BalloonboardWeb, :view
 
   defp badge_class(true), do: "badge-success"
-  defp badge_class(false), do: "badge-danger"
+  defp badge_class(false), do: ""
 
   def format_duration(duration) do
     m = div(duration, 60) |> Integer.to_string() |> String.pad_leading(2, "0")

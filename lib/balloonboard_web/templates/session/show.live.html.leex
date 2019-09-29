@@ -1,49 +1,41 @@
 <div id="session">
     <div class="row">
-        <%= for player <- @active_players do %>
-            <div class="col-sm">
-                <a phx-click="player" phx-value="<%= player %>" class="btn btn-block btn-lg active-<%= @active[player] %>" style="background: <%= @players[player].color %> url(<%= avatar_url(@players[player].avatar) %>) no-repeat center center; background-size: 32vh 32vh;">
-                    <span class="round">
-                        <%= @stats[player].finished_rounds %>
-                    </span>
-                    <span class="badge badge-pill duration <%= badge_class(@active[player]) %>">
-                    <%= format_duration(@stats[player].round_duration) %>
-                    •
-                    <%= format_duration(@stats[player].total_duration_without_active_round) %>
-                    </span>
-                </a>
-            </div>
-        <% end %>
-    </div>
-</div>
-
-<div id="tags">
-    <div class="row">
-        <%= for player <- @active_players do %>
-            <div class="col-sm">
-                <ul>
-                    <%= if @tags[0] do %>
-                        <%= for tag <- @tags[0] do %>
-                            <li>
-                                <a phx-click="tag" phx-value="<%= player %>,<%= tag.id %>" class="btn btn-outline-light">
-                                    <%= tag.tag %>
-                                    <%= @stats[player].tags[tag.tag] %>
-                                </a>
-                            </li>
+        <div class="col-sm-9">
+            <table>
+            <tbody>
+                <%= for player <- @active_players do %>
+                    <tr>
+                        <td>
+                            <img src="<%= avatar_url(@players[player.player_id].avatar) %>" class="avatar">
+                        </td>
+                        <td class="round" style="color: <%= @players[player.player_id].color %>">
+                            <%= List.first(@rounds[player.player_id]).round_count %>
+                        </td>
+                        <td class="total-duration">
+                            <%= format_duration(List.first(@rounds[player.player_id]).total_duration) %>
+                        </td>
+                        <%= for r <- @rounds[player.player_id] do %>
+                            <td class="round-duration <%= badge_class(r.round_active) %>">
+                                <span class="index">
+                                    #<%= r.round_index %>
+                                </span>
+                                <span>
+                                    <%= format_duration(r.round_duration) %>
+                                </span>
+                            </td>
                         <% end %>
-                    <% end %>
-                    <%= if @tags[player] do %>
-                        <%= for tag <- @tags[player] do %>
-                            <li>
-                                <a phx-click="tag" phx-value="<%= player %>,<%= tag.id %>" class="btn btn-outline-light">
-                                    <%= tag.tag %>
-                                    <%= @stats[player].tags[tag.tag] %>
-                                </a>
-                            </li>
-                        <% end %>
-                    <% end %>
-                </ul>
-            </div>
-        <% end %>
+                    </tr>
+                <% end %>
+            </tbody>
+            </table>
+        </div>
+        <div class="col-sm-3">
+            <a phx-click="next" class="btn btn-success" id="bt-next">
+                NEXT
+            </a>
+            <a class="btn btn-secondary" id="bt-tag">
+                TAG
+            </a>
+        </div>
     </div>
 </div>
